@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李裕珺天天开心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 40%, #FCE4EC 100%);
+            font-family: 'Microsoft YaHei', sans-serif;
+            position: relative;
+            background-image: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M50,30 C55,35 60,35 65,30 C70,25 70,20 65,15 C60,10 55,10 50,15 C45,10 40,10 35,15 C30,20 30,25 35,30 C40,35 45,35 50,30 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/%3E%3C/svg%3E');
+        }
+        
+        /* 天空云朵效果 */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            filter: blur(15px);
+            z-index: 0;
+            animation: floatCloud linear infinite;
+        }
+        
+        @keyframes floatCloud {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+        
+        /* 武汉地标背景 */
+        .wuhan-landmarks {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            z-index: 0;
+            opacity: 0.2;
+            background-image: url('data:image/svg+xml,%3Csvg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg"%3E%3C!-- 黄鹤楼 --%3E%3Cpath d="M400,50 L380,120 L360,100 L340,120 L320,100 L300,150 L320,180 L360,160 L400,180 L440,160 L480,180 L500,150 L480,100 L460,120 L440,100 L420,120 Z" fill="%238B4513"/%3E%3C!-- 长江大桥 --%3E%3Crect x="0" y="180" width="800" height="5" fill="%234A4A4A"/%3E%3Cpath d="M0,180 L0,160 L50,160 L50,180 M100,180 L100,160 L150,160 L150,180 M200,180 L200,160 L250,160 L250,180 M300,180 L300,160 L350,160 L350,180 M400,180 L400,140 L450,140 L450,180 M500,180 L500,160 L550,160 L550,180 M600,180 L600,160 L650,160 L650,180 M700,180 L700,160 L750,160 L750,180 M800,180 L800,160 L850,160 L850,180" stroke="%234A4A4A" stroke-width="3"/%3E%3C/svg%3E');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: bottom;
+        }
+        
+        .container {
+            text-align: center;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(255, 82, 82, 0.2);
+            border: 1px solid rgba(255, 183, 197, 0.5);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            margin-top: 100px;
+        }
+        
+        /* 计时器样式 */
+        .counter {
+            position: absolute;
+            top: 50px;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .counter-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 40px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 183, 197, 0.7);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .counter-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,183,197,0.3) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+        }
+        
+        .counter-text {
+            position: relative;
+            font-size: 1.8rem;
+            color: #E91E63;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .counter-number {
+            color: #6A1B9A;
+            font-size: 2.2rem;
+            margin: 0 10px;
+            font-weight: bold;
+            display: inline-block;
+            animation: floatNumber 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.9;
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes floatNumber {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(2deg);
+            }
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,183,197,0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            color: #E91E63;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+            animation: floating 3s ease-in-out infinite;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '✨';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            animation: twinkle 2s infinite;
+        }
+        
+        h1::before {
+            content: '✨';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            animation: twinkle 2s infinite 0.5s;
+        }
+        
+        p {
+            font-size: 1.8rem;
+            color: #6A1B9A;
+            margin-bottom: 20px;
+            animation: floating 3s ease-in-out infinite;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        .p2 {
+            animation-delay: 0.5s;
+        }
+        
+        .decoration {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .wuhan-icon {
+            font-size: 2rem;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .wuhan-icon:nth-child(1) { /* 樱花 */
+            color: #FF80AB;
+            animation-delay: 0s;
+        }
+        
+        .wuhan-icon:nth-child(2) { /* 黄鹤楼 */
+            color: #8B4513;
+            animation-delay: 0.5s;
+        }
+        
+        .wuhan-icon:nth-child(3) { /* 长江 */
+            color: #2196F3;
+            animation-delay: 1s;
+        }
+        
+        .wuhan-icon:nth-child(4) { /* 梅花 */
+            color: #E91E63;
+            animation-delay: 1.5s;
+        }
+        
+        .wuhan-icon:nth-child(5) { /* 樱花 */
+            color: #FF80AB;
+            animation-delay: 2s;
+        }
+        
+        /* 樱花元素 */
+        .cherry-blossom {
+            position: absolute;
+            background-color: #FFB7C5;
+            border-radius: 150% 0 150% 0;
+            animation: fall linear infinite;
+            z-index: 0;
+        }
+        
+        /* 梅花元素 */
+        .plum-blossom {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            z-index: 0;
+            animation: fallPlum linear infinite;
+        }
+        
+        .plum-blossom::before,
+        .plum-blossom::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #E91E63;
+            border-radius: 50%;
+        }
+        
+        .plum-blossom::before {
+            left: -8px;
+            top: 0;
+        }
+        
+        .plum-blossom::after {
+            left: 0;
+            top: -8px;
+        }
+        
+        .plum-blossom span {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #E91E63;
+            border-radius: 50%;
+            display: block;
+        }
+        
+        /* 动画定义 */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateY(-50%) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1.2);
+            }
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-10%) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fallPlum {
+            0% {
+                transform: translateY(-10%) rotate(0deg) scale(0.6) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(180deg) scale(1) translateX(30px);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(15deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 40px;
+                margin: 0 20px;
+                margin-top: 80px;
+            }
+            
+            .counter {
+                top: 30px;
+            }
+            
+            .counter-container {
+                padding: 15px 30px;
+            }
+            
+            .counter-text {
+                font-size: 1.4rem;
+            }
+            
+            .counter-number {
+                font-size: 1.8rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h1::before, h1::after {
+                font-size: 1.2rem;
+                left: -20px;
+                right: -20px;
+            }
+            
+            p {
+                font-size: 1.4rem;
+            }
+            
+            .wuhan-icon {
+                font-size: 1.5rem;
+            }
+            
+            .decoration {
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 30px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wuhan-landmarks"></div>
+    
+    <div class="counter">
+        <div class="counter-container">
+            <span class="counter-text">我们在一起的第 <span id="dayCounter" class="counter-number">35</span> 天</span>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1>李姐</h1>
+        <p>天天开心</p>
+        <p class="p2">事事顺利</p>
+        <div class="decoration">
+            <span class="wuhan-icon">🌸</span> <!-- 樱花 -->
+            <span class="wuhan-icon">🏯</span> <!-- 黄鹤楼 -->
+            <span class="wuhan-icon">🌊</span> <!-- 长江 -->
+            <span class="wuhan-icon">🌺</span> <!-- 梅花 -->
+            <span class="wuhan-icon">🌸</span> <!-- 樱花 -->
+        </div>
+    </div>
+    
+    <script>
+        // 创建樱花效果
+        function createCherryBlossoms() {
+            const numberOfBlossoms = 60;
+            
+            for (let i = 0; i < numberOfBlossoms; i++) {
+                createBlossom();
+                // 每两个樱花创建一个梅花
+                if (i % 2 === 0) {
+                    createPlumBlossom();
+                }
+            }
+        }
+        
+        function createBlossom() {
+            const blossom = document.createElement('div');
+            blossom.classList.add('cherry-blossom');
+            
+            // 随机大小
+            const size = Math.random() * 10 + 5;
+            blossom.style.width = `${size}px`;
+            blossom.style.height = `${size}px`;
+            
+            // 随机位置
+            blossom.style.left = `${Math.random() * 100}vw`;
+            
+            // 随机颜色（粉色渐变）
+            const hue = Math.floor(Math.random() * 10) + 350; // 350-360度（粉色范围）
+            const saturation = Math.floor(Math.random() * 30) + 70; // 70-100%
+            const lightness = Math.floor(Math.random() * 20) + 80; // 80-100%
+            blossom.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            
+            // 随机透明度
+            blossom.style.opacity = Math.random() * 0.7 + 0.3;
+            
+            // 随机旋转角度
+            blossom.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            // 随机飘落时间
+            const duration = Math.random() * 15 + 15;
+            blossom.style.animationDuration = `${duration}s`;
+            
+            // 随机延迟
+            blossom.style.animationDelay = `${Math.random() * 10}s`;
+            
+            // 添加到body
+            document.body.appendChild(blossom);
+            
+            // 动画结束后移除并重新创建
+            setTimeout(() => {
+                document.body.removeChild(blossom);
+                createBlossom();
+            }, (duration + 10) * 1000);
+        }
+        
+        function createPlumBlossom() {
+            const blossom = document.createElement('div');
+            blossom.classList.add('plum-blossom');
+            blossom.innerHTML = '<span></span>';
+            
+            // 随机位置
+            blossom.style.left = `${Math.random() * 100}vw`;
+            
+            // 随机透明度
+            blossom.style.opacity = Math.random() * 0.6 + 0.4;
+            
+            // 随机大小
+            const scale = Math.random() * 0.4 + 0.6;
+            blossom.style.transform = `scale(${scale})`;
+            
+            // 随机飘落时间
+            const duration = Math.random() * 20 + 20;
+            blossom.style.animationDuration = `${duration}s`;
+            
+            // 随机延迟
+            blossom.style.animationDelay = `${Math.random() * 10}s`;
+            
+            // 添加到body
+            document.body.appendChild(blossom);
+            
+            // 动画结束后移除并重新创建
+            setTimeout(() => {
+                document.body.removeChild(blossom);
+                createPlumBlossom();
+            }, (duration + 10) * 1000);
+        }
+        
+        // 添加轻柔的背景音乐（可选）
+        function addBackgroundMusic() {
+            // 这里可以添加背景音乐
+        }
+        
+        // 创建天空云朵
+        function createClouds() {
+            const numberOfClouds = 6;
+            
+            for (let i = 0; i < numberOfClouds; i++) {
+                createCloud();
+            }
+        }
+        
+        function createCloud() {
+            const cloud = document.createElement('div');
+            cloud.classList.add('cloud');
+            
+            // 随机大小
+            const size = Math.random() * 100 + 50;
+            cloud.style.width = `${size}px`;
+            cloud.style.height = `${size * 0.6}px`;
+            
+            // 随机位置
+            cloud.style.top = `${Math.random() * 30 + 5}vh`;
+            cloud.style.left = `-${size}px`;
+            
+            // 随机速度
+            const duration = Math.random() * 120 + 60;
+            cloud.style.animationDuration = `${duration}s`;
+            
+            // 随机延迟
+            cloud.style.animationDelay = `${Math.random() * 30}s`;
+            
+            // 添加到body
+            document.body.appendChild(cloud);
+            
+            // 动画结束后移除并重新创建
+            setTimeout(() => {
+                document.body.removeChild(cloud);
+                createCloud();
+            }, (duration + 30) * 1000);
+        }
+        
+        // 初始化计时器
+        function initCounter() {
+            const counterElement = document.getElementById('dayCounter');
+            // 设置基准日期（基于2025年9月13日）
+            const startDate = new Date('2025-09-13'); // 这里设置为你们在一起的开始日期
+            
+            // 计算并更新天数的函数
+            function calculateAndUpdateDays() {
+                const now = new Date();
+                // 计算两个日期之间的时间差（毫秒）
+                const timeDiff = now - startDate;
+                // 转换为天数（向上取整，确保第一天也计数）
+                const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                // 更新UI
+                counterElement.textContent = days;
+            }
+            
+            // 立即计算并更新一次
+            calculateAndUpdateDays();
+            
+            // 设置定时器，每分钟更新一次，确保日期变更时能及时反映
+            setInterval(calculateAndUpdateDays, 60000);
+            
+            // 监听页面可见性变化，确保用户回来时能看到最新值
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    calculateAndUpdateDays();
+                }
+            });
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            createCherryBlossoms();
+            createClouds();
+            initCounter();
+            // addBackgroundMusic(); // 如需背景音乐可以取消注释
+        });
+    </script>
+</body>
+</html>
