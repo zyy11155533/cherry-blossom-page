@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>樱花祝福</title>
+    <meta http-equiv="refresh" content="0;url=./simple-cherry-blossom.html">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f4ff;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        a {
+            color: #ff6b81;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>樱花祝福页面</h2>
+        <p>正在跳转到樱花祝福页面...</p>
+        <p>如果没有自动跳转，请<a href="./simple-cherry-blossom.html">点击这里</a></p>
+    </div>
+    <script>
+        // JavaScript后备跳转，确保meta refresh失败时也能跳转
+        setTimeout(function() {
+            window.location.href = './simple-cherry-blossom.html';
+        }, 1000);
+    </script>
+</body>
+</html>
